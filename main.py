@@ -31,10 +31,12 @@ def main():
     field = AsteroidField()
     ship = player.Player(x, y)
     #asteroid = asteroid.Asteroid
-    score = 0
+    score_num = 0
+    
     while True:
         log_state()
-        
+        score = f"score: {score_num}"
+        pygame.display.set_caption(score)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
@@ -47,7 +49,7 @@ def main():
             if asteroid.collides_with(ship):
                 log_event("player_hit")
                 print("Game over!")
-                print(f"your score: {score}")
+                print(f"your score: {score_num}")
                 sys.exit()
             for shot in shots:
                 if asteroid.collides_with(shot):
@@ -55,7 +57,8 @@ def main():
                     checker = asteroid.split()
                     shot.kill()
                     if checker:
-                        score += 10
+                        score_num += 10
+                        
 
         pygame.display.flip()
         
